@@ -42,7 +42,7 @@ myReplace("A quick brown fox jumped over the lazy dog", "jumped", "leaped");
 
 
 
-//Advanced Code Solution:
+//Advanced Code Solution:(In these code, replacement works only for the first existense of searched element but casing is done in every letters of replacing element)
 function myReplace(str, before, after) {
 
     // create a function that will change the casing of any number of letter in parameter "target"
