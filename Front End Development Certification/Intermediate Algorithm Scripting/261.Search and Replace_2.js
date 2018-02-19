@@ -1,4 +1,4 @@
-
+//Advanced Code Solution:(In these code, replacement works for every existense of searched element and casing is done in every letters of replacing element)
 function myReplace(str, before, after) {
   var re = new RegExp(before,"gi");
     // create a function that will change the casing of any number of letter in parameter "target"
