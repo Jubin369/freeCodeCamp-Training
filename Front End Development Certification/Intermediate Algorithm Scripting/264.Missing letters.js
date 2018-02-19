@@ -1,4 +1,4 @@
-// Basic Code Solution:
+// Basic Code Solution:(first missed letter in the range can only be found)
 function fearNotLetter(str) {
 
   for(var i = 0; i < str.length; i++) {
@@ -22,7 +22,7 @@ fearNotLetter("abce");
 
 
 
-//Intermediate Code Solution:
+//Intermediate Code Solution:(first missed letter in the range can only be found)
 // Adding this solution for the sake of avoiding using 'for' and 'while' loops.
 // See the explanation for reference as to why. It's worth the effort.
 
@@ -48,7 +48,7 @@ fearNotLetter("abce");
 
 
 
-//Advanced Code Solution:
+//Advanced Code Solution:(All missed letters in the range can be found)
 function fearNotLetter(str) {
   var allChars = '';
   var notChars = new RegExp('[^'+str+']','g');
