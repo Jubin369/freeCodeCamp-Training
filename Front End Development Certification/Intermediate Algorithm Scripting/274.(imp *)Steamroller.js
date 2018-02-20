@@ -55,3 +55,9 @@ function steamrollArray(arr) {
 }
 
 steamrollArray([1, [2], [3, [[4]]]]);
+
+/*Code Explanation:
+
+First we turn the array to a string, which will give us a string of numbers seperated by a comma, double comma if there was an empty array and literal object text if there was an object, which we can fix it later in our if statement.
+We replace the double comma with one, then split it back into an array.
+map through the array and fix object values and convert string numbers to regular numbers.*/
