@@ -111,3 +111,43 @@ fs.readFile(file, function (err, contents) {
   console.log(lines)
 })
 
+
+
+
+//5th assgn:FILTERED LS 
+/*
+The fs.readdir() method takes a pathname as its first argument and a  
+  callback as its second. The callback signature is:  
+   
+     function callback (err, list) {... }  
+   
+  where list is an array of filename strings.  
+   
+  Documentation on the fs module can be found by pointing your browser here:  
+  file:///home/ec2-user/.nvm/versions/node/v6.13.1/lib/node_modules/learnyou  
+  node/node_apidoc/fs.html  
+   
+  You may also find node's path module helpful, particularly the extname  
+  method.  
+   
+  Documentation on the path module can be found by pointing your browser  
+  here:  
+  file:///home/ec2-user/.nvm/versions/node/v6.13.1/lib/node_modules/learnyou  
+  node/node_apidoc/path.html  
+
+*/
+
+const fs = require('fs')
+const path = require('path')
+
+const folder = process.argv[2]
+const ext = '.' + process.argv[3]
+
+fs.readdir(folder, function (err, files) {
+  if (err) return console.error(err)
+  files.forEach(function (file) {
+    if (path.extname(file) === ext) {
+      console.log(file)
+    }
+  })
+})
