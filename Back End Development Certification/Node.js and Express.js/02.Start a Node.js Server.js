@@ -1,4 +1,21 @@
- 
+ //Documentation
+/*
+
+  Documentation on the fs module can be found by pointing your browser here:  
+  file:///home/ec2-user/.nvm/versions/node/v6.13.1/lib/node_modules/learnyounode/node_apidoc/fs.html
+  
+  Documentation on Buffers can be found by pointing your browser here:  
+  file:///home/ec2-user/.nvm/versions/node/v6.13.1/lib/node_modules/learnyounode/node_apidoc/buffer.html
+  
+  Documentation on the path module can be found by pointing your browser here:  
+  file:///home/ec2-user/.nvm/versions/node/v6.13.1/lib/node_modules/learnyounode/node_apidoc/path.html
+  
+  To learn more about callbacks, check out:  
+  (https://github.com/maxogden/art-of-node#callbacks).  
+  
+
+*/
+
  //2nd assgn:babystep
  /*
  
@@ -42,20 +59,12 @@
   All synchronous (or blocking) filesystem methods in the fs module end with  
   'Sync'. To read a file, you'll need to use  
   fs.readFileSync('/path/to/file'). This method will return a Buffer object  
-  containing the complete contents of the file.  
-   
-  Documentation on the fs module can be found by pointing your browser here:  
-  file:///home/ec2-user/.nvm/versions/node/v6.13.1/lib/node_modules/learnyou  
-  node/node_apidoc/fs.html  
+  containing the complete contents of the file.    
    
   Buffer objects are Node's way of efficiently representing arbitrary arrays  
   of data, whether it be ascii, binary or some other format. Buffer objects  
   can be converted to strings by simply calling the toString() method on  
-  them. e.g. var str = buf.toString().  
-   
-  Documentation on Buffers can be found by pointing your browser here:  
-  file:///home/ec2-user/.nvm/versions/node/v6.13.1/lib/node_modules/learnyou  
-  node/node_apidoc/buffer.html  
+  them. e.g. var str = buf.toString().    
    
   If you're looking for an easy way to count the number of newlines in a  
   string, recall that a JavaScript String can be .split() into an array of  
@@ -76,7 +85,7 @@ console.log(lines)
 
 //4th assgn:MY FIRST ASYNC I/O!
 /*
-The solution to this problem is almost the same as the previous problem  
+  The solution to this problem is almost the same as the previous problem  
   except you must now do it the Node.js way: asynchronous.  
    
   Instead of fs.readFileSync() you will want to use fs.readFile() and  
@@ -93,11 +102,7 @@ The solution to this problem is almost the same as the previous problem
   argument is truthy. If there is no error, you should have your Buffer  
   object as the second argument. As with readFileSync(), you can supply  
   'utf8' as the second argument and put the callback as the third argument  
-  and you will get a String instead of a Buffer.  
-   
-  Documentation on the fs module can be found by pointing your browser here:  
-  file:///home/ec2-user/.nvm/versions/node/v6.13.1/lib/node_modules/learnyou  
-  node/node_apidoc/fs.html
+  and you will get a String instead of a Buffer.
 */
 const fs = require('fs')
 const file = process.argv[2]
@@ -116,24 +121,15 @@ fs.readFile(file, function (err, contents) {
 
 //5th assgn:FILTERED LS 
 /*
-The fs.readdir() method takes a pathname as its first argument and a  
+  The fs.readdir() method takes a pathname as its first argument and a  
   callback as its second. The callback signature is:  
    
      function callback (err, list) {... }  
    
-  where list is an array of filename strings.  
-   
-  Documentation on the fs module can be found by pointing your browser here:  
-  file:///home/ec2-user/.nvm/versions/node/v6.13.1/lib/node_modules/learnyou  
-  node/node_apidoc/fs.html  
+  where list is an array of filename strings.    
    
   You may also find node's path module helpful, particularly the extname  
-  method.  
-   
-  Documentation on the path module can be found by pointing your browser  
-  here:  
-  file:///home/ec2-user/.nvm/versions/node/v6.13.1/lib/node_modules/learnyou  
-  node/node_apidoc/path.html  
+  method.    
 
 */
 
@@ -151,3 +147,11 @@ fs.readdir(folder, function (err, files) {
     }
   })
 })
+
+
+
+//6th assgn:MAKE IT MODULAR
+/*
+
+
+*/
