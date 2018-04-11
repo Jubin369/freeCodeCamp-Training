@@ -3,6 +3,8 @@
   Documentation on the http module can be found by pointing your browser here:  
   file:///home/ec2-user/.nvm/versions/node/v6.13.1/lib/node_modules/learnyounode/node_apidoc/http.html
   
+  Documentation on the url module can be found by pointing your browser here:  
+  file:///home/ec2-user/.nvm/versions/node/v6.13.1/lib/node_modules/learnyounode/node_apidoc/url.html
   
 */
 
@@ -74,4 +76,159 @@ const server = http.createServer(function (req, res) {
   fs.createReadStream(process.argv[3]).pipe(res)
 })
 
+server.listen(Number(process.argv[2]))
+
+
+//12th assgn:HTTP Uppercaserer
+/*
+
+  Write an HTTP server that receives only POST requests and converts  
+  incoming POST body characters to upper-case and returns it to the client.  
+   
+  Your server should listen on the port provided by the first argument to  
+  your program.  
+   
+ ─────────────────────────────────────────────────────────────────────────────  
+   
+ ## HINTS  
+   
+  While you're not restricted to using the streaming capabilities of the  
+  request and response objects, it will be much easier if you do.  
+   
+  There are a number of different packages in npm that you can use to  
+  "transform" stream data as it's passing through. For this exercise the  
+  through2-map package offers the simplest API.  
+   
+  through2-map allows you to create a transform stream using only a single  
+  function that takes a chunk of data and returns a chunk of data. It's  
+  designed to work much like Array#map() but for streams:  
+   
+     var map = require('through2-map')  
+     inStream.pipe(map(function (chunk) {  
+       return chunk.toString().split('').reverse().join('')  
+     })).pipe(outStream)  
+   
+  In the above example, the incoming data from inStream is converted to a  
+  String (if it isn't already), the characters are reversed and the result  
+  is passed through to outStream. So we've made a chunk character reverser!  
+  Remember though that the chunk size is determined up-stream and you have  
+  little control over it for incoming data.  
+   
+  To install through2-map type:  
+   
+     $ npm install through2-map  
+   
+  If you don't have an Internet connection, simply make a node_modules  
+  directory and copy the entire directory for the module you want to use  
+  from inside the learnyounode installation directory:    
+
+*/
+const http = require('http')
+const map = require('through2-map')
+
+const server = http.createServer(function (req, res) {
+  if (req.method !== 'POST') {
+    return res.end('send me a POST\n')
+  }
+
+  req.pipe(map(function (chunk) {
+    return chunk.toString().toUpperCase()
+  })).pipe(res)
+})
+
+server.listen(Number(process.argv[2]))
+
+
+//13th assgn:HTTP JSON API Server
+/*
+
+   Write an HTTP server that serves JSON data when it receives a GET request  
+  to the path '/api/parsetime'. Expect the request to contain a query string  
+  with a key 'iso' and an ISO-format time as the value.  
+   
+  For example:  
+   
+  /api/parsetime?iso=2013-08-10T12:10:15.474Z  
+   
+  The JSON response should contain only 'hour', 'minute' and 'second'  
+  properties. For example:  
+   
+     {  
+       "hour": 14,  
+       "minute": 23,  
+       "second": 15  
+     }  
+   
+  Add second endpoint for the path '/api/unixtime' which accepts the same  
+  query string but returns UNIX epoch time in milliseconds (the number of  
+  milliseconds since 1 Jan 1970 00:00:00 UTC) under the property 'unixtime'.  
+  For example:  
+   
+     { "unixtime": 1376136615474 }  
+   
+  Your server should listen on the port provided by the first argument to  
+  your program.  
+   
+ ─────────────────────────────────────────────────────────────────────────────  
+   
+ ## HINTS  
+   
+  The request object from an HTTP server has a url property that you will  
+  need to use to "route" your requests for the two endpoints.  
+   
+  You can parse the URL and query string using the Node core 'url' module.  
+  url.parse(request.url, true) will parse content of request.url and provide  
+  you with an object with helpful properties.  
+   
+  For example, on the command prompt, type:  
+   
+     $ node -pe "require('url').parse('/test?q=1', true)"  
+     
+   
+  Your response should be in a JSON string format. Look at JSON.stringify()  
+  for more information.  
+   
+  You should also be a good web citizen and set the Content-Type properly:  
+   
+     res.writeHead(200, { 'Content-Type': 'application/json' })  
+   
+  The JavaScript Date object can print dates in ISO format, e.g. new  
+  Date().toISOString(). It can also parse this format if you pass the string  
+  into the Date constructor. Date.getTime() will also come in handy. 
+
+*/
+const http = require('http')
+const url = require('url')
+
+function parsetime (time) {
+  return {
+    hour: time.getHours(),
+    minute: time.getMinutes(),
+    second: time.getSeconds()
+  }
+}
+
+function unixtime (time) {
+  return { unixtime: time.getTime() }
+}
+
+const server = http.createServer(function (req, res) {
+  const parsedUrl = url.parse(req.url, true)
+  const time = new Date(parsedUrl.query.iso)
+  let result
+
+  if (/^\/api\/parsetime/.test(req.url)) {
+    result = parsetime(time)
+  } else if (/^\/api\/unixtime/.test(req.url)) {
+    result = unixtime(time)
+  }
+
+  if (result) {
+    res.writeHead(200, { 'Content-Type': 'application/json' })
+    res.end(JSON.stringify(result))
+  } else {
+    res.writeHead(404)
+    res.end()
+  }
+})
 server.listen(Number(process.argv[2]))
