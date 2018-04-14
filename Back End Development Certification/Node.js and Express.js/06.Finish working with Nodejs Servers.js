@@ -10,7 +10,6 @@
 
 //11th assgn:HTTP File Server
 /*
-
    Write an HTTP server that serves the same text file for each request it  
   receives.  
    
@@ -56,8 +55,6 @@
      })  
      server.listen(8000)  
    
-    
-   
   The fs core module also has some streaming APIs for files. You will need  
   to use the fs.createReadStream() method to create a stream representing  
   the file you are given as a command-line argument. The method returns a  
@@ -66,7 +63,6 @@
   stream with an HTTP response stream. 
 
 */
-
 const http = require('http')
 const fs = require('fs')
 
@@ -81,7 +77,6 @@ server.listen(Number(process.argv[2]))
 
 //12th assgn:HTTP Uppercaserer
 /*
-
   Write an HTTP server that receives only POST requests and converts  
   incoming POST body characters to upper-case and returns it to the client.  
    
