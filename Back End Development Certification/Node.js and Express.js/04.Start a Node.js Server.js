@@ -1,6 +1,5 @@
  //Documentation
 /*
-
   Documentation on the fs module can be found by pointing your browser here:  
   file:///home/ec2-user/.nvm/versions/node/v6.13.1/lib/node_modules/learnyounode/node_apidoc/fs.html
   
@@ -43,10 +42,6 @@
     
     console.log(result)
 
-
-
-
-
 //3rd assgn:MY FIRST I/O!
 
 /*
@@ -82,9 +77,6 @@ const lines = contents.toString().split('\n').length - 1
 console.log(lines)
 
 
-
-
-
 //4th assgn:MY FIRST ASYNC I/O!
 /*
   The solution to this problem is almost the same as the previous problem  
@@ -117,8 +109,6 @@ fs.readFile(file, function (err, contents) {
   const lines = contents.toString().split('\n').length - 1
   console.log(lines)
 })
-
-
 
 
 //5th assgn:FILTERED LS 
