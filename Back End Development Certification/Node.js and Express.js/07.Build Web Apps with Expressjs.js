@@ -1,8 +1,4 @@
-//Documentation
-/*
 
-
-*/
 
 //1st assgn: HELLO WORLD!
 /*
@@ -195,7 +191,6 @@ app.post('/form', function(req, res) {
 
 app.listen(process.argv[2])
 
-
 //5th assgn: STYLISH CSS
 /*
 Style your HTML from previous example with some Stylus middleware.
@@ -238,7 +233,6 @@ For your own projects, Stylus requires to be installed like any other
 dependency:
 
     npm install stylus
-
 */
 
 var express = require('express')
