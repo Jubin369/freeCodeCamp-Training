@@ -14,8 +14,8 @@
   Documentation on the net module can be found by pointing your browser here:  
   file:///home/ec2-user/.nvm/versions/node/v6.13.1/lib/node_modules/learnyounode/node_apidoc/net.html
 */
-//8th assgn: HTTP COLLECT
 
+//8th assgn: HTTP COLLECT
 /*
 Write a program that performs an HTTP GET request to a URL provided to you  
   as the first command-line argument. Collect all data from the server (not  
@@ -156,9 +156,7 @@ for (let i = 0; i < 3; i++) {
 
 
 //10th assgn:TIME SERVER
-
 /*
-
   Write a TCP time server!  
    
   Your server should listen to TCP connections on the port provided by the  
