@@ -138,7 +138,7 @@ mongo.connect(url, function(err, client) {
     age: {
       $gt: +age
     }
-  },{ _id: 0, name: 1, age: 1}).toArray(function(err, docs) {
+  }).project({ _id: 0, name: 1, age: 1}).toArray(function(err, docs) {
     if (err) throw err
     console.log(docs)
     client.close()
