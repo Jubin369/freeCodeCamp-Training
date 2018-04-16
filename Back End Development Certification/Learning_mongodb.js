@@ -13,7 +13,7 @@ MongoClient.connect(url, function(err, client) {
   console.log("Connected successfully to server");
 
   const db = client.db(dbName);
-
+  /*
   insertDocuments(db, function() {
     updateDocument(db, function() {
         findDocuments(db, function() {
@@ -25,6 +25,14 @@ MongoClient.connect(url, function(err, client) {
         });
     });
   });
+  */
+  
+  insertDocuments(db, function() {
+    indexCollection(db, function() {
+      client.close();
+    });
+  });
+  
 });
 
 const insertDocuments = function(db, callback) {
@@ -78,3 +86,24 @@ const removeDocument = function(db, callback) {
     callback(result);
   });    
 }
+
+const indexCollection = function(db, callback) {
+  db.collection('documents').createIndex(
+    { "a": 1 },
+      null,
+      function(err, results) {
+        console.log(results);
+        callback();
+    }
+  );
+};
+
+/*
+
+## Next Steps
+
+ * [MongoDB Documentation](http://mongodb.org)
+ * [Read about Schemas](http://learnmongodbthehardway.com)
+ * [Star us on GitHub](https://github.com/mongodb/node-mongodb-native)
+
+*/
