@@ -56,10 +56,17 @@ have finished.
 var mongo = require('mongodb').MongoClient
 var age = process.argv[2]
 
-var url = 'mongodb://localhost:27017/learnyoumongo'
+var url = 'mongodb://localhost:27017'
 
-mongo.connect(url, function(err, db) {
-  if (err) throw err
+
+// Database Name
+const dbName = 'learnyoumongo';
+
+mongo.connect(url, function(err, client) {
+  if (err) throw err;
+  
+  const db = client.db(dbName);
+  
   var parrots = db.collection('parrots')
   parrots.find({
     age: {
@@ -68,6 +75,6 @@ mongo.connect(url, function(err, db) {
   }).toArray(function(err, docs) {
     if (err) throw err
     console.log(docs)
-    db.close()
+    client.close()
   })
 })
