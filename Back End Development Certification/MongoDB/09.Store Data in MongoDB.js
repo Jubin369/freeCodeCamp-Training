@@ -20,6 +20,14 @@
   * http://docs.mongodb.org/manual/aggregation/
   * http://docs.mongodb.org/manual/core/aggregation-introduction/
   * http://mongodb.github.io/node-mongodb-native/2.2/api/Collection.html#aggregate
+ To read more about pipelines, please visit [Aggregation](http://docs.mongodb.org/manual/core/aggregation-introduction/).
+ To read more about aggregate(), please visit [`aggregate()`](http://mongodb.github.io/node-mongodb-native/2.2/api/Collection.html#aggregate).
+
+Note:
+If your program does not finish executing, you may have forgotten to
+close the db. That can be done by calling db.close() after you
+have finished.
+
 */
 
 //3rd assgn: FIND
@@ -60,11 +68,6 @@ Here is an example:
     }).toArray(function(err, documents) {
     
     })
-
-If your program does not finish executing, you may have forgotten to
-close the db. That can be done by calling db.close() after you
-have finished.
-
 
 */
 var mongo = require('mongodb').MongoClient
@@ -126,11 +129,6 @@ Here is an example:
     }).toArray(function(err, documents) {
     
     })
-
-If your program does not finish executing, you may have forgotten to
-close the db. That can be done by calling db.close() after you
-have finished.
-
 */
 var mongo = require('mongodb').MongoClient
 var age = process.argv[2]
@@ -216,11 +214,6 @@ To insert a document, one would need to call insert() on the collection, like th
     
       // other operations
     })
-
-If your program does not finish executing, you may have forgotten to
-close the db. That can be done by calling db.close() after you
-have finished.
-
 */
 var mongo = require('mongodb').MongoClient
 
@@ -290,11 +283,6 @@ Ex.
     // { a: 2, b: 1 }
 
 The first argument to update() is the query. This query is what filters the documents that we are wanting to update. The second argument is an object of the properties to update. Pay close attention to the $set property. If we were to omit $set, the document would be replaced with the object represented by the second argument.
-
-If your program does not finish executing, you may have forgotten to
-close the db. That can be done by calling db.close() after you
-have finished.
-
 */
 var mongo = require('mongodb').MongoClient
 
@@ -345,10 +333,6 @@ Ex.
 
 The first argument to remove() is the query.
 
-If your program does not finish executing, you may have forgotten to
-close the db. That can be done by calling db.close() after you
-have finished.
-
 */
 var mongo = require('mongodb').MongoClient
 
@@ -396,10 +380,6 @@ Here is an example:
     }, function(err, count) {
     
     })
-
-If your program does not finish executing, you may have forgotten to
-close the db. That can be done by calling db.close() after you
-have finished.
 
 */
 var mongo = require('mongodb').MongoClient
@@ -460,8 +440,6 @@ To use the aggregate() function, one first needs the collection.
 The aggregate() function takes an array of objects as the first argument.
 
 This array will contain the different pipelines for the aggregation.
-To read more about pipelines, please visit [Aggregation](http://docs.mongodb.org/manual/core/aggregation-introduction/).
-To read more about aggregate(), please visit [`aggregate()`](http://mongodb.github.io/node-mongodb-native/2.2/api/Collection.html#aggregate).
 
 The two main pipeline stages we will use will be $match and $group.
 
@@ -528,9 +506,4 @@ representation.
       var value = "1"
       Number(value).toFixed(5)
       // => '1.00000'
-
-If your program does not finish executing, you may have forgotten to
-close the db. That can be done by calling db.close() after you
-have finished.
-
 */
