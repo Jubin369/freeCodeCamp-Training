@@ -290,3 +290,28 @@ close the db. That can be done by calling db.close() after you
 have finished.
 
 */
+var mongo = require('mongodb').MongoClient
+
+var url = 'mongodb://localhost:27017'
+
+
+// Database Name
+const dbName = process.argv[2];
+
+mongo.connect(url, function(err, client) {
+  if (err) throw err;
+  const db = client.db(dbName);
+  var collection = db.collection('users')
+  collection.update({
+    username: 'tinatime'
+  }, {
+    $set: {
+      age: 40
+    }
+  }, function(err) {
+    if (err) throw err
+    client.close()
+  })
+})
+
+//7th assgn:
