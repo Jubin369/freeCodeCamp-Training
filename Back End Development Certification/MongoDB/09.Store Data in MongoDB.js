@@ -6,14 +6,20 @@
   * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt
  4th
   * http://docs.mongodb.org/manual/reference/method/db.collection.find/#explicitly-exclude-the-id-field
-  * http://mongodb.github.io/node-mongodb-native/2.2/api/Collection.html#find
  5th
   * http://mongodb.github.io/node-mongodb-native/2.2/api/Collection.html#insert
  6th
   * http://mongodb.github.io/node-mongodb-native/2.2/api/Collection.html#update
   * http://docs.mongodb.org/manual/tutorial/modify-documents/
   * http://docs.mongodb.org/manual/reference/operator/update/set/#set
-
+ 7th
+  * http://mongodb.github.io/node-mongodb-native/2.2/api/Collection.html#remove
+ 8th
+  * http://mongodb.github.io/node-mongodb-native/2.2/api/Collection.html#count
+ 9th
+  * http://docs.mongodb.org/manual/aggregation/
+  * http://docs.mongodb.org/manual/core/aggregation-introduction/
+  * http://mongodb.github.io/node-mongodb-native/2.2/api/Collection.html#aggregate
 */
 
 //3rd assgn: FIND
@@ -314,4 +320,217 @@ mongo.connect(url, function(err, client) {
   })
 })
 
-//7th assgn:
+//7th assgn: REMOVE
+/*
+This lesson involves removing a document with the given _id.
+
+The database name will be accessible via process.argv[2].
+
+The collection name will be passed as the second argument to your script.
+
+The _id will be passed as the third argument to your script.
+
+-------------------------------------------------------------------------------
+
+## HINTS
+
+To remove a document, one would need to call remove() on the collection.
+
+Ex.
+
+    
+    collection.remove({
+      name: 'foo'
+    }, callback)
+
+The first argument to remove() is the query.
+
+If your program does not finish executing, you may have forgotten to
+close the db. That can be done by calling db.close() after you
+have finished.
+
+*/
+var mongo = require('mongodb').MongoClient
+
+var url = 'mongodb://localhost:27017'
+
+
+// Database Name
+const dbName = process.argv[2];
+
+mongo.connect(url, function(err, client) {
+  if (err) throw err;
+  const db = client.db(dbName);
+
+  var collection = db.collection(process.argv[3])
+  collection.remove({
+    _id: process.argv[4]
+  }, function(err) {
+    if (err) throw err
+    client.close()
+  })
+})
+
+//8th assgn: COUNT
+/*
+Here we will learn how to count the number of documents that
+meet certain criteria.
+
+Use the parrots collection from the database named learnyoumongo to
+count all documents where age is greater than the first argument
+passed to your script.
+
+Using console.log, print the number to stdout.
+
+-------------------------------------------------------------------------------
+
+## HINTS
+
+To count the number of documents meeting certain criteria,
+we must use the collection.count() function.
+
+Here is an example:
+
+    collection.count({
+      name: 'foo'
+    }, function(err, count) {
+    
+    })
+
+If your program does not finish executing, you may have forgotten to
+close the db. That can be done by calling db.close() after you
+have finished.
+
+*/
+var mongo = require('mongodb').MongoClient
+var age = process.argv[2]
+
+var url = 'mongodb://localhost:27017'
+
+// Database Name
+const dbName = 'learnyoumongo';
+
+mongo.connect(url, function(err, client) {
+  if (err) throw err;
+  const db = client.db(dbName);
+  var parrots = db.collection('parrots')
+  parrots.count({
+    age: {
+      $gt: +age
+    }
+  }, function(err, count) {
+    if (err) throw err
+    console.log(count)
+    client.close()
+  })
+})
+
+//9th assgn:AGGREGATE
+/*
+Next up is aggregation. Aggregation allows one to do things like
+calculate the sum of a field of multiple documents or the average
+of a field of documents meeting particular criteria.
+
+Say you have a collection named prices. Each price document is modeled
+like so:
+
+    {
+      "name": "Tshirt",
+      "size": "S",
+      "price": 10,
+      "quantity": 12
+      "meta": {
+        "vendor": "hanes",
+        "location": "US"
+      }
+    }
+
+In this exercise, we need to calculate the average price for all documents
+in the prices collection in the database named learnyoumongo that have
+the size that will be passed as the first argument to your script.
+
+Use console.log() to print the average price rounded to 2 decimal places
+to stdout after you have found it.
+
+-------------------------------------------------------------------------------
+
+## HINTS
+
+To use the aggregate() function, one first needs the collection.
+The aggregate() function takes an array of objects as the first argument.
+
+This array will contain the different pipelines for the aggregation.
+To read more about pipelines, please visit [Aggregation](http://docs.mongodb.org/manual/core/aggregation-introduction/).
+To read more about aggregate(), please visit [`aggregate()`](http://mongodb.github.io/node-mongodb-native/2.2/api/Collection.html#aggregate).
+
+The two main pipeline stages we will use will be $match and $group.
+
+### $match
+
+$match is used similar to the way a query is done. It allows us to select
+the documents that meet certain criteria.
+
+Ex.
+
+    var match = { $match: { status: 'A' } }
+
+The above example will match all of the documents that have a status
+property equal to A.
+
+### $group
+
+$group is what allows us to run operations on certain properties.
+
+So, say we wanted to get the sum of the values of the property value
+where status is equal to A and have it placed in the total property.
+
+Ex.
+
+    // [
+    //  { status: 'A', value: 1 },
+    //  { status: 'B', value: 2 },
+    //  { status: 'A', value: 10 }
+    // ]
+    
+    collection.aggregate([
+      { $match: { status: 'A' }}
+    , { $group: {
+        _id: 'total' // This can be an arbitrary string in this case
+      , total: {
+          // $sum is the operator used here
+          $sum: '$value'
+        }
+      }}
+    ]).toArray(function(err, results) {
+      // handle error
+      console.log(results)
+      // => [
+      // =>   { _id: 'total', total: 11 }
+      // => ]
+    })
+
+Other operators used in the $group stage include:
+
+  * `$avg`
+  * `$first`
+  * `$last`
+  * `$max`
+  * `$min`
+  * `$push`
+  * `$addToSet`
+
+# Rounding
+
+The Number prototype contains a function toFixed(), which accepts the
+number of decimal places you would like to round to, and returns a string
+representation.
+
+      var value = "1"
+      Number(value).toFixed(5)
+      // => '1.00000'
+
+If your program does not finish executing, you may have forgotten to
+close the db. That can be done by calling db.close() after you
+have finished.
+
+*/
