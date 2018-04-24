@@ -8,3 +8,10 @@ function reverseString(str) {
 }
 
 reverseString("hello");
+
+
+//Basic Code Solution:
+
+function reverseString(str) {
+  return str.split('').reverse().join('');
+}
