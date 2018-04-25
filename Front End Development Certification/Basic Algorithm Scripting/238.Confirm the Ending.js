@@ -1,4 +1,4 @@
-
+//my solution
 function confirmEnding(str, target) {
   var targetVal=target.length;
   var pos=str.length-targetVal;
@@ -8,3 +8,11 @@ function confirmEnding(str, target) {
 }
 
 confirmEnding("Bastian", "n");
+
+
+//Basic Code Solution:
+function confirmEnding(str, target) {
+  return str.substr(-target.length) === target;
+}
+
+
