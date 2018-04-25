@@ -15,3 +15,11 @@ function slasher(arr, howMany) {
   return arr;
 }
 slasher([1, 2, 3], 2);
+
+
+//Intermediate Code Solution:
+function slasher(arr, howMany) {
+
+  // Return string after the amount chopped off.
+  return arr.slice(howMany);
+}
