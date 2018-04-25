@@ -1,8 +1,7 @@
 
 function bouncer(arr) {
-  var result = arr.filter(Boolean);
-
-  return result;
+  return arr.filter(Boolean);
 }
 
-bouncer([false, null, 0, NaN, undefined, ""]);
+
+bouncer([7, "ate", "", false, 9]);
