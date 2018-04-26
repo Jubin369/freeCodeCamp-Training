@@ -17,8 +17,6 @@ function myReplace(str, before, after) {
 myReplace("A quick brown fox jumped over the lazy dog", "jumped", "leaped");
 
 
-
-
 //Intermediate Code Solution:(In these code, replacement works for every existense of searched element)
 function myReplace(str, before, after) {
 //Create a regular expression object
@@ -36,10 +34,6 @@ function myReplace(str, before, after) {
 
 // test here
 myReplace("A quick brown fox jumped over the lazy dog", "jumped", "leaped");
-
-
-
-
 
 
 //Advanced Code Solution:(In these code, replacement works only for the first existense of searched element but casing is done in every letters of replacing element)
