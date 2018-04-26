@@ -39,3 +39,12 @@ function spinalCase(str) {
 
 // test here
 spinalCase('This Is Spinal Tap');
+//Code Explanation:
+/*
+    Split the string at one of the following conditions (converted to an array)
+    a whitespace character [\s] is encountered
+    underscore character [_] is encountered
+    or is followed by an uppercase letter [(?=[A-Z])]
+    Join the array using a hyphen (-)
+    Lowercase the whole resulting string
+*/
