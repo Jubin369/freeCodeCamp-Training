@@ -38,9 +38,21 @@ mongoose.connect(process.env.MONGO_URI);
 // fields, use simple validators like `required` or `unique`, and set
 // `default` values. See the [mongoose docs](http://mongoosejs.com/docs/guide.html).
 
-// <Your code here >
+var Schema = mongoose.Schema;
+var personSchema = new Schema({
+    name: {
+        type: String,
+        required: true
+      },
+    age: {
+        type: Number
+      },
+    favoriteFoods: {
+        type:[String]
+      }
+  });
 
-var Person /* = <Your Model> */
+var Person = mongoose.model('Person',personSchema);
 
 // **Note**: GoMix is a real server, and in real servers interactions with
 // the db are placed in handler functions, to be called when some event happens
