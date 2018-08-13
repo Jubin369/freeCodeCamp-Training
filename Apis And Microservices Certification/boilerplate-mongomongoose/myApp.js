@@ -156,7 +156,9 @@ var findOneByFood = function(food, done) {
 
 var findPersonById = function(personId, done) {
   
-  done(null/*, data*/);
+  Person.findById(personId,function(err,data){
+    done(null, data);
+  });
   
 };
 
