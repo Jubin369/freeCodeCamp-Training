@@ -90,9 +90,10 @@ var Person = mongoose.model('Person',personSchema);
 // });
 
 var createAndSavePerson = function(done) {
-  
-  done(null /*, data*/);
-
+  let person = new Person({"name":"JuBin Ayoob","age":24,"favoriteFoods":["dosa","biriyani"]});
+  person.save(function(err, data) {
+     done(null , data);
+  });
 };
 
 /** 4) Create many People with `Model.create()` */
