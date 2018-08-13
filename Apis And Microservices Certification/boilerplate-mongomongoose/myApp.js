@@ -106,9 +106,9 @@ var createAndSavePerson = function(done) {
 // 'arrayOfPeople'.
 
 var createManyPeople = function(arrayOfPeople, done) {
-    
-    done(null/*, data*/);
-    
+  Person.create(arrayOfPeople,function(err,docs){
+    done(null, docs);
+  });
 };
 
 /** # C[R]UD part II - READ #
