@@ -27,13 +27,10 @@ app.get("/api/hello", function (req, res) {
 // timestamp API endpoint... 
 app.get("/api/timestamp/:date_string", function (req, res) {
   let timestamp = req.params.date_string
-  
   if(parseInt(timestamp)>99999){
     timestamp=parseInt(timestamp)*1000;
   }
-  
   let date = new Date(timestamp);
-  
   res.json({unix: date.getTime(),utc:date.toUTCString()});
 });
 
