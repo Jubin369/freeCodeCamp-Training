@@ -98,6 +98,7 @@ const indexCollection = function(db, callback) {
   );
 };
 
+
 /*
 
 ## Next Steps
