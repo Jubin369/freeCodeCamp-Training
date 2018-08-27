@@ -67,8 +67,8 @@ class Presentational extends React.Component {
     );
   }
 };
-// Change code above this line
 
+// Change code above this line
 const mapStateToProps = (state) => {
   return {messages: state}
 };
