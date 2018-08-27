@@ -13,8 +13,8 @@ const immutableReducer = (state = todos, action) => {
     case ADD_TO_DO:
       // don't mutate state here or the tests will fail
       
-      let state = [...state,action.todo];
-      return state;
+      let newTodo = [...state,action.todo];
+      return newTodo;
     default:
       return state;
   }
